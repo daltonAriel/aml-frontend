@@ -6,4 +6,11 @@ export const routes: Routes = [
 		loadComponent: () =>
 			import("../admin/modules/login/admin-login").then((c) => c.Login),
 	},
+	{
+		path: "admin-dashboard",
+		
+		loadComponent: () =>
+			import("../admin/modules/base/admin-base-layout").then((c) => c.AdminBaseLayout),
+			loadChildren: () => import("../admin/admin.routes").then((r) => r.adminRoutes),
+	},
 ];

@@ -1,0 +1,87 @@
+<aside
+  class="z-20 flex h-full flex-col bg-[#0f172a] text-slate-300 drop-shadow-xl drop-shadow-gray-900 transition-all duration-300 ease-in-out"
+  [class.w-64]="!isCollapsed()"
+  [class.w-20]="isCollapsed()"
+>
+  <div class="flex h-20 items-center justify-center border-b border-slate-800/50 px-4">
+    @if (!isCollapsed()) {
+      <div
+        type="button"
+        (click)="setOpen()"
+        class="flex items-center gap-2 overflow-hidden whitespace-nowrap transition-opacity duration-300 ease-in-out"
+      >
+        <img class="h-8 w-auto" src="/logo.png" alt="Logo" />
+        <span class="text-xl font-bold tracking-wide text-white"
+          >AML <span class="text-[#2db2b1]">CORDOVA</span></span
+        >
+      </div>
+    }
+    @if (isCollapsed()) {
+      <div type="button" (click)="setOpen()" class="flex items-center justify-center">
+        <img class="h-8 w-auto" src="/logo.png" alt="Logo" />
+      </div>
+    }
+  </div>
+
+  <nav class="custom-scrollbar flex-1 space-y-2 overflow-x-hidden overflow-y-auto px-3 py-6">
+    <a
+      type="button"
+      (click)="setOpen()"
+      href="#"
+      class="group flex items-center gap-3 rounded-xl bg-[#2db2b1]/10 px-3 py-3 text-[#2db2b1] transition-colors"
+    >
+      <svg class="flex h-6 w-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <title>Panel Principal</title>
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+        ></path>
+      </svg>
+      @if (!isCollapsed()) {
+        <span class="font-medium whitespace-nowrap">Panel Principal</span>
+      }
+    </a>
+
+    <a
+      type="button"
+      (click)="setOpen()"
+      href="#"
+      class="group flex items-center gap-3 rounded-xl px-3 py-3 text-slate-400 transition-colors hover:bg-slate-800/50 hover:text-white"
+    >
+      <svg class="flex h-6 w-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <title>Usuarios</title>
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+        ></path>
+      </svg>
+      @if (!isCollapsed()) {
+        <span class="font-medium whitespace-nowrap">Gestión de Empresas</span>
+      }
+    </a>
+  </nav>
+
+  <div class="border-t border-slate-800/50 p-4">
+    <button
+      type="button"
+      class="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-slate-400 transition-colors hover:bg-red-400/10 hover:text-red-400"
+    >
+      <svg class="flex h-6 w-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <title>Cerrar Sesión</title>
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+        ></path>
+      </svg>
+      @if (!isCollapsed()) {
+        <span class="font-medium whitespace-nowrap">Cerrar Sesión</span>
+      }
+    </button>
+  </div>
+</aside>

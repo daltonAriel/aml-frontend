@@ -1,0 +1,16 @@
+@reference "tailwindcss";
+
+.pagination-btn-nav {
+  @apply flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-400 
+         transition-all hover:bg-slate-100 hover:text-slate-600 disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+.pagination-number {
+  @apply flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-sm font-medium 
+         text-slate-600 transition-all hover:bg-slate-50;
+}
+
+.pagination-number.active {
+  @apply border-transparent bg-[#2db2b1] font-bold text-white shadow-md shadow-[#2db2b1]/30;
+}
+
