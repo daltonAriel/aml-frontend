@@ -1,0 +1,105 @@
+<div class=" bg-slate-50/50 p-4 antialiased">
+  <div class="mx-auto max-w-4xl">
+    <div class="mb-6 flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl font-bold text-slate-900">Personalización de Tema</h1>
+        <p class="text-sm text-slate-500">Configure la identidad visual de la institución.</p>
+      </div>
+    </div>
+
+    <form [formGroup]="temaForm" class="space-y-6">
+      
+      <div class="rounded-xl border border-slate-200 bg-white shadow-sm">
+        <div class="border-b border-slate-100 p-4">
+          <h2 class="flex items-center gap-2 font-semibold text-slate-800">
+            <lucide-icon [img]="Palette" class="h-4 w-4 text-[#2db2b1]"></lucide-icon>
+            Slogan y Colores
+          </h2>
+        </div>
+
+        <div class="p-6">
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div class="md:col-span-3">
+              <admin-form
+                [isBlocked]="isLoading()"
+                [control]="temaForm.controls['temaSlogan']"
+                [label]="'Slogan Institucional'"
+                [placeholder]="'Escriba el slogan aquí...'"
+                type="text"
+                formControlName="temaSlogan"
+              ></admin-form>
+            </div>
+
+            <div class="">
+              <admin-select-color 
+                [isBlocked]="isLoading()"
+                [control]="temaForm.controls['temaPrimary']" 
+                formControlName="temaPrimary" 
+                label="Color Primario">
+              </admin-select-color>
+            </div>
+
+            <div class="">
+              <admin-select-color 
+                [isBlocked]="isLoading()"
+                [control]="temaForm.controls['temaSecondary']" 
+                formControlName="temaSecondary"
+                [isBlocked]="isLoading()" 
+                label="Color Secundario">
+              </admin-select-color>
+            </div>
+
+            <div class="">
+              <admin-select-color
+                [isBlocked]="isLoading()"
+                [control]="temaForm.controls['temaTertiary']" 
+                formControlName="temaTertiary" 
+                label="Color Terciario">
+              </admin-select-color>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-slate-50/80 border-t border-slate-100 p-4 flex justify-end">
+          <button
+            type="button"
+            (click)="actualizarTema()"
+            [disabled]="temaForm.invalid || isLoading()"
+            class="group flex items-center gap-2 rounded-xl bg-[#2db2b1] px-5 py-2 text-sm font-bold text-white shadow-md transition-all hover:bg-[#259695] active:scale-95 disabled:opacity-50"
+          >
+            <admin-spiner-loader 
+              [disabled]="!isLoading()"
+              [width]="'w-4'" 
+              [height]="'h-4'" 
+              [colorFill]="'fill-white'">
+            </admin-spiner-loader>
+            Guardar Cambios Visuales
+          </button>
+        </div>
+      </div>
+
+      <div class="rounded-xl border border-slate-200 bg-white shadow-sm">
+        <div class="border-b border-slate-100 p-4">
+          <h2 class="flex items-center gap-2 font-semibold text-slate-800">
+            <lucide-icon [img]="ImageIcon" class="h-4 w-4 text-[#2db2b1]"></lucide-icon>
+            Logotipo Institucional
+          </h2>
+        </div>
+
+        <div class="p-6">
+          <div class="max-w-md">
+            <admin-img-load-form 
+              (onSave)="guardarImagen($event)"
+              (onDelete)="eliminarImagen()"
+              [isBlocked]="isLoadingLogo()"
+              [initialUrl]="logoUrl()">
+            </admin-img-load-form>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<ngx-sonner-toaster position="bottom-right" richColors duration="5000" />

@@ -1,0 +1,236 @@
+<div class="min-h-screen bg-slate-50/50 p-4 antialiased">
+  <div class="mx-auto max-w-4xl">
+    <div class="mb-6 flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl font-bold text-slate-900">Crear Empresa</h1>
+        <p class="text-sm text-slate-500">Registre la entidad legal para el control de cumplimiento.</p>
+      </div>
+    </div>
+
+    <form [formGroup]="empresaForm" class="space-y-6">
+      <div class="rounded-xl border border-slate-200 bg-white shadow-sm">
+        <div class="border-b border-slate-100 p-4">
+          <h2 class="flex items-center gap-2 font-semibold text-slate-800">
+            <lucide-icon [img]="Building2" class="2-4 h-4 text-emerald-600"></lucide-icon>
+            Información de la Entidad
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 gap-5 p-6 md:grid-cols-2">
+          <div class="md:col-span-2">
+            <admin-form
+              [label]="'Razón Social'"
+              [placeholder]="'Nombre legal completo'"
+              [type]="'text'"
+              [customErrors]="{ nombreDuplicado: 'Este nombre ya está registrado' }"
+              formControlName="empresaNombre"
+              [control]="empresaForm.controls['empresaNombre']"
+              [isBlocked]="isLoading()"
+            ></admin-form>
+          </div>
+          <div class="">
+            <admin-form
+              [label]="'Siglas'"
+              [placeholder]="'Siglas de la empresa'"
+              [type]="'text'"
+              formControlName="empresaSiglas"
+              [control]="empresaForm.controls['empresaSiglas']"
+              [isBlocked]="isLoading()"
+            ></admin-form>
+          </div>
+
+          <div>
+            <admin-form
+              [label]="'Número de RUC'"
+              [placeholder]="'17XXXXXXXX001'"
+              [type]="'text'"
+              [maxLen]="13"
+              formControlName="empresaRuc"
+              [isBlocked]="isLoading()"
+              [control]="empresaForm.controls['empresaRuc']"
+            >
+            </admin-form>
+          </div>
+
+          <div>
+            <admin-form
+              [label]="'Código Interno'"
+              [placeholder]="'EMP-001'"
+              [type]="'text'"
+              [maxLen]="40"
+              [customErrors]="{ codigoDuplicado: 'Este código ya está registrado' }"
+              formControlName="empresaCodigo"
+              [isBlocked]="isLoading()"
+              [control]="empresaForm.controls['empresaCodigo']"
+            >
+            </admin-form>
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-xl border border-slate-200 bg-white shadow-sm">
+        <div class="border-b border-slate-100 p-4">
+          <h2 class="flex items-center gap-2 font-semibold text-slate-800">
+            <lucide-icon [img]="MapIcon" class="2-4 h-4 text-emerald-600"></lucide-icon>
+            Localización
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 gap-5 p-6 md:grid-cols-2">
+          <div class="">
+            <admin-select-search-form
+              [label]="'Provincia'"
+              [placeholder]="'Seleccione la provincia...'"
+              [options]="provincias()"
+              (onChangeSelection)="onChangeProvincia($event)"
+              formControlName="provinciaId"
+              [control]="empresaForm.controls['provinciaId']"
+              [isBlocked]="isLoading()"
+            >
+            </admin-select-search-form>
+          </div>
+
+          <div>
+            <admin-select-search-form
+              [label]="'Canton'"
+              [placeholder]="'Seleccione el canton...'"
+              [options]="cantones()"
+              (onChangeSelection)="onChangeCanton($event)"
+              formControlName="cantonId"
+              [control]="empresaForm.controls['cantonId']"
+              [isBlocked]="isLoading()"
+            >
+            </admin-select-search-form>
+          </div>
+
+          <div>
+            <admin-select-search-form
+              [label]="'Parroquia'"
+              [placeholder]="'Seleccione la parroquia...'"
+              [options]="parroquias()"
+              formControlName="parroquiaId"
+              [isBlocked]="isLoading()"
+              [control]="empresaForm.controls['parroquiaId']"
+            >
+            </admin-select-search-form>
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-xl border border-slate-200 bg-white shadow-sm">
+        <div class="border-b border-slate-100 p-4">
+          <h2 class="flex items-center gap-2 font-semibold text-slate-800">
+            <lucide-icon [img]="Phone" class="2-4 h-4 text-emerald-600"></lucide-icon>
+            Contacto
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 gap-5 p-6 md:grid-cols-2">
+          <div class="">
+            <admin-form
+              [label]="'Telefono'"
+              [placeholder]="'09XXXXXXXX'"
+              [type]="'text'"
+              [FileIcon]="Phone"
+              formControlName="empresaTelefono"
+              [control]="empresaForm.controls['empresaTelefono']"
+              [isBlocked]="isLoading()"
+            >
+            </admin-form>
+          </div>
+
+          <div class="">
+            <admin-form
+              [label]="'Email'"
+              [placeholder]="'example@empresa.com'"
+              [type]="'email'"
+              [FileIcon]="Mail"
+              formControlName="empresaEmail"
+              [control]="empresaForm.controls['empresaEmail']"
+              [isBlocked]="isLoading()"
+            >
+            </admin-form>
+          </div>
+
+          <div>
+            <admin-form
+              [label]="'Web'"
+              [placeholder]="'www.empresa.com'"
+              [type]="'text'"
+              [FileIcon]="Globe"
+              formControlName="empresaWeb"
+              [control]="empresaForm.controls['empresaWeb']"
+              [isBlocked]="isLoading()"
+            >
+            </admin-form>
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-xl border border-slate-200 bg-white shadow-sm">
+        <div class="border-b border-slate-100 p-4">
+          <h2 class="flex items-center gap-2 font-semibold text-slate-800">
+            <lucide-icon [img]="Settings" class="2-4 h-4 text-emerald-600"></lucide-icon>
+            Estado y Control
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 gap-5 p-6 md:grid-cols-2">
+          <div>
+            <admin-select-state
+              [label]="'Estado'"
+              formControlName="empresaEstado"
+              [control]="empresaForm.controls['empresaEstado']"
+              [isBlocked]="isLoading()"
+            >
+            </admin-select-state>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-6 mx-auto mt-8 w-full">
+        <div
+          class="flex items-center justify-between rounded-2xl border border-slate-700/60 bg-slate-900/90 p-4 shadow-2xl ring-1 ring-white/5 backdrop-blur-md"
+        >
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2 rounded-full border border-slate-700/50 bg-slate-800/50 px-3 py-1.5 shadow-inner">
+              @if (empresaForm.controls["empresaEstado"].value == true) {
+                <span class="relative flex h-2.5 w-2.5">
+                  <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
+                </span>
+                <span class="text-sm font-medium tracking-wide text-slate-200"> Activo </span>
+              } @else {
+                <span class="relative flex h-2.5 w-2.5">
+                  <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75"></span>
+                  <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-500"></span>
+                </span>
+                <span class="text-sm font-medium tracking-wide text-slate-200"> Inactivo </span>
+              }
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <button
+              type="submit"
+              (click)="guardarEmpresa()"
+              [disabled]="empresaForm.invalid"
+              class="flex items-center gap-2 rounded-xl bg-emerald-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-emerald-500 focus:ring-2 focus:ring-emerald-500 focus:ring-offset-1 focus:ring-offset-slate-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+            >
+              <admin-spiner-loader
+                [disabled]="!isLoading()"
+                [width]="'w-5'"
+                [height]="'h-5'"
+                [colorFill]="'fill-slate-50'"
+                [bgColor]="'text-slate-600/20'"
+              ></admin-spiner-loader>
+              Guardar Cambios</button
+            >`
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<ngx-sonner-toaster position="bottom-right" richColors duration="5000" />

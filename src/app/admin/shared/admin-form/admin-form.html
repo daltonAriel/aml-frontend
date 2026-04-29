@@ -1,0 +1,50 @@
+<div class="w-full">
+  @if (label) {
+    <label class="mb-1.5 block text-xs font-bold tracking-wider text-slate-500 uppercase">
+      {{ label }}
+    </label>
+  }
+
+  <div class="relative flex items-center">
+    @if (FileIcon) {
+      <div class="pointer-events-none absolute left-3 flex items-center justify-center">
+        <lucide-icon
+          [img]="FileIcon"
+          [size]="18"
+          [class]="errorMessage() ? 'text-red-400' : 'text-slate-400'"
+        >
+        </lucide-icon>
+      </div>
+    }
+
+    <input
+      [type]="type"
+      [maxLength]="maxLen ?? 255"
+      [value]="value()"
+      [disabled]="isBlocked"
+      [style.pointer-events]="isBlocked ? 'none' : 'auto'"
+      [placeholder]="placeholder"
+      (input)="handleInput($event)"
+      (blur)="onTouched()"
+      class="w-full rounded-lg border-2 bg-slate-50 py-2.5 text-sm transition-all outline-none focus:bg-white focus:ring-4"
+      [class.pl-10]="FileIcon"
+      [class.px-4]="!FileIcon"
+      [class]="
+        errorMessage()
+          ? 'border-red-500 focus:border-red-500 focus:ring-red-500/10'
+          : 'border-slate-300 focus:border-[#2db2b1] focus:ring-[#2db2b1]/10'
+      "
+    />
+  </div>
+
+  <div class="mt-1 min-h-5">
+    @if (errorMessage()) {
+      <p
+        class="animate-in fade-in slide-in-from-top-1 flex items-center gap-1 text-[11px] font-bold text-red-500"
+      >
+        <span class="h-1 w-1 rounded-full bg-red-500"></span>
+        {{ errorMessage() }}
+      </p>
+    }
+  </div>
+</div>

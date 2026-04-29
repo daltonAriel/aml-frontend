@@ -1,0 +1,111 @@
+<div class="w-full" [class.pointer-events-none]="disabled()" [class.opacity-60]="disabled()">
+  @if (label) {
+    <label class="mb-1.5 block text-xs font-bold tracking-wider text-slate-500 uppercase" 
+           [class.text-slate-400]="disabled()">
+      {{ label }}
+    </label>
+  }
+
+  <div
+    (dragover)="!disabled() && onDragOver($event)"
+    (dragleave)="onDragLeave()"
+    (drop)="!disabled() && onDrop($event)"
+    [class.border-[#2db2b1]]="(isDragging() || previewUrl()) && !disabled()"
+    [class.bg-white]="isDragging() && !disabled()"
+    [class.border-slate-200]="disabled()"
+    [class.bg-slate-100]="disabled()"
+    [class.cursor-not-allowed]="disabled()"
+    class="relative flex min-h-30 flex-col items-center justify-center rounded-2xl border-2 border-dashed bg-slate-50 p-4 transition-all duration-200"
+  >
+    @if (!previewUrl()) {
+      <div 
+        class="flex flex-col items-center text-center w-full h-full py-4" 
+        [class.cursor-pointer]="!disabled()"
+        (click)="!disabled() && fileInput.click()"
+      >
+        <div 
+          class="mb-2 rounded-full p-3 transition-transform"
+          [class.text-[#2db2b1]]="!disabled()"
+          [class.bg-slate-200]="disabled()"
+          [class.text-slate-400]="disabled()"
+          [class.hover:scale-110]="!disabled()"
+        >
+          <lucide-icon [name]="Upload" class="h-6 w-6"></lucide-icon>
+        </div>
+        <p class="text-sm font-semibold text-slate-700 px-2" [class.text-slate-400]="disabled()">
+          {{ disabled() ? 'Carga deshabilitada' : 'Haz clic para subir o arrastra' }}
+        </p>
+        <p class="mt-1 text-xs text-slate-400">{{ placeholder }}</p>
+      </div>
+    } @else {
+      <div class="flex w-full flex-col items-center gap-4 sm:flex-row sm:items-center">
+        <div 
+          class="group relative h-24 w-24 shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm sm:h-20 sm:w-20"
+          [class.cursor-pointer]="!disabled()"
+          (click)="!disabled() && fileInput.click()" 
+          [title]="disabled() ? '' : 'Cambiar imagen'"
+        >
+          <img alt="logo preview" [src]="previewUrl()" class="h-full w-full object-cover transition-all" [class.group-hover:opacity-50]="!disabled()" />
+          @if (!disabled()) {
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
+              <lucide-icon [name]="Upload" class="h-6 w-6 text-slate-800"></lucide-icon>
+            </div>
+          }
+        </div>
+
+        <div class="flex flex-1 flex-col overflow-hidden text-center sm:text-left">
+          <span class="truncate text-sm font-bold text-slate-700 w-full" [class.text-slate-400]="disabled()">
+            {{ fileName() }}
+          </span>
+          <span 
+            class="text-xs font-medium" 
+            [class.text-emerald-500]="hasNewFile() && !disabled()" 
+            [class.text-blue-500]="!hasNewFile() && hasDbImage() && !disabled()"
+            [class.text-slate-400]="disabled()"
+          >
+            {{ hasNewFile() ? 'Listo para guardar' : 'En base de datos' }}
+          </span>
+        </div>
+      </div>
+    }
+
+    <input
+      #fileInput
+      type="file"
+      class="hidden"
+      [disabled]="disabled()"
+      accept="image/png, image/jpeg"
+      (change)="onFileSelected($event)"
+    />
+  </div>
+
+  @if (previewUrl()) {
+    <div class="mt-3 flex flex-col gap-2 animate-in fade-in slide-in-from-top-2 sm:flex-row sm:justify-end">
+      @if (hasNewFile() || hasDbImage()) {
+        <button
+          [disabled]="disabled()"
+          type="button"
+          (click)="onDeleteImage()"
+          class="flex w-full items-center justify-center gap-1.5 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs font-bold text-red-600 transition-colors hover:bg-red-100 hover:text-red-700 sm:w-auto sm:py-1.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-400"
+        >
+          <lucide-icon [name]="hasNewFile() ? X : Trash2" class="h-4 w-4"></lucide-icon>
+          {{ hasNewFile() ? 'Limpiar imagen seleccionada' : 'Eliminar de BD' }}
+        </button>
+      }
+      
+      @if (hasNewFile()) {
+        <button
+          [disabled]="disabled()"
+          type="button"
+          (click)="onSaveImage()"
+          class="flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#2db2b1] px-4 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#259695] sm:w-auto sm:py-1.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-slate-300"
+        >
+          <lucide-icon [name]="Save" class="h-4 w-4"></lucide-icon>
+          Guardar imagen
+        </button>
+      }
+    </div>
+  }
+</div>
+
+<ngx-sonner-toaster position="bottom-right" richColors duration="5000" />
