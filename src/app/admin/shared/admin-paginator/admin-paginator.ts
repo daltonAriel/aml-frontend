@@ -13,7 +13,8 @@ export class AdminPaginator {
 	totalElements = input.required<number>();
 	totalPages = input.required<number>();
 	currentPage = input<number>(0); // Indexado en 0 como Spring
-	pageSize = input<number>(10);
+	pageSize = input<number>(20);
+
 
 	// Eventos de salida
 	pageChange = output<number>();

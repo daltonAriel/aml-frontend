@@ -62,7 +62,4 @@ export class Login {
       });
   }
 
-  close() {
-    console.log(this.stattusHttpLogin);
-  }
 }

@@ -112,7 +112,7 @@
             <span class="relative z-10 flex items-center justify-center">
               <p class="m-2">
                 <admin-spiner-loader
-                  [enabled]="stattusHttpLogin()"
+                  [disabled]="!stattusHttpLogin()"
                   [width]="'w-6'"
                   [height]="'h-6'"
                 ></admin-spiner-loader>

@@ -17,6 +17,8 @@
     "paths": {
       "@config/*": ["./src/app/config/*"],
       "@shared/*": ["./src/app/shared/*"],
+      "@interfaces/*": ["./src/app/interfaces/*"],
+      "@validators/*": ["./src/app/validators/*"],
     }
   },
   "angularCompilerOptions": {

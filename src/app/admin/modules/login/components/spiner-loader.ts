@@ -6,13 +6,13 @@ import { Component, computed, input } from '@angular/core';
   selector: 'admin-spiner-loader',
   template: `
 
-    @if (enabled() == true) {
+    @if (disabled() == false) {
             <svg
-        [ngClass]="width() + ' ' + height() + ' ' + color()"
+        [ngClass]="width() + ' ' + height() + ' ' + colorFill() + ' ' + bgColor()"
         aria-hidden="true"
         role="status"
         aria-hidden="true"
-        class="animate-spin text-slate-50"
+        class="animate-spin"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -33,13 +33,15 @@ import { Component, computed, input } from '@angular/core';
   
 })
 export class SpinnerComponent {
-  enabled = input<boolean>(false);
+  disabled = input<boolean>(false);
 
-  changeStatus = computed(this.enabled);
+  changeStatus = computed(this.disabled);
 
   width = input<string>('w-8');
 
   height = input<string>('h-8');
 
-  color = input<string>('fill-[#2db2b1]');
+  colorFill = input<string>('fill-slate-50');
+
+  bgColor = input<string>('text-[#2db2b1]');
 }

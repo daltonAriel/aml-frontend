@@ -45,5 +45,13 @@ export class AdminSessionService {
     this._token.set(newToken);//este metodo actualiza todo a nivel del modulo Admin
   }
 
+  getToken(): string | null {
+    return this._token();
+  }
 
+  logout() {
+    sessionStorage.removeItem('jwt');
+    this._token.set(null);
+    // redirigir al login
+  }
 }

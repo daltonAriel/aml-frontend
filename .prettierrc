@@ -1,11 +1,12 @@
 {
 	"printWidth": 100,
-	"singleQuote": true,
+	"singleQuote": false,
 	"overrides": [
 		{
 			"files": "*.html",
 			"options": {
-				"parser": "angular"
+				"parser": "angular",
+				"printWidth": 140
 			}
 		}
 	],

@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { AdminSessionService } from "../../services/admin-session-service";
 import { AdminNav } from "./components/navigation/admin-nav";
 import { AdminSidenav } from "./components/sidenav/admin-sidenav";
 import { ToggleSidenavService } from "./services/toggle-sidenav-service";
@@ -9,6 +8,6 @@ import { ToggleSidenavService } from "./services/toggle-sidenav-service";
 	templateUrl: "./admin-base-layout.html",
 	standalone: true,
 	imports: [AdminSidenav, AdminNav],
-	providers: [ToggleSidenavService, AdminSessionService],
+	providers: [ToggleSidenavService],
 })
 export class AdminBaseLayout {}
