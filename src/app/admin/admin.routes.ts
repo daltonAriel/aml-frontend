@@ -13,7 +13,9 @@ export const adminRoutes: Routes = [
   {
     path: "empresas/:empresaId/editar",
     loadComponent: () =>
-      import("./modules/empresas/actualizar-empresa/admin-actualizar-empresa").then((c) => c.AdminActualizarEmpresa),
+      import("./modules/empresas/actualizar-empresa/admin-actualizar-empresa").then(
+        (c) => c.AdminActualizarEmpresa,
+      ),
   },
   {
     path: "empresas/:empresaId/tema",
@@ -26,5 +28,13 @@ export const adminRoutes: Routes = [
       import("./modules/empresa-dashboard/admin-empresa-dashboard").then(
         (c) => c.AdminEmpresaDashboard,
       ),
+  },
+  {
+    path: "empresas/:empresaId/usuarios",
+    loadComponent: () => import("./modules/usuarios/usuarios").then((c) => c.Usuarios),
+  },
+  {
+    path: "menu-data",
+    loadComponent: () => import("./modules/menu-data/menu-data").then((c) => c.MenuData),
   },
 ];

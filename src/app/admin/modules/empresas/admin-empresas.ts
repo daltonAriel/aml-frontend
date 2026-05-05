@@ -11,117 +11,111 @@ import {
 } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
+import { RouterLink } from "@angular/router";
 import type { ApiResponse } from "@config/apiResponse";
 import type { PageInterface } from "@interfaces/page-interface";
+import { LucideAngularModule, Settings } from "lucide-angular";
 import { NgxSonnerToaster, toast } from "ngx-sonner";
-import {
-	debounceTime,
-	distinctUntilChanged,
-	finalize,
-	startWith,
-	tap,
-} from "rxjs";
+import { debounceTime, distinctUntilChanged, finalize, startWith, tap } from "rxjs";
 import { AdminPaginator } from "../../shared/admin-paginator/admin-paginator";
 import { AdminTableLoader } from "../../shared/admin-table-loader/admin-table-loader";
 import type { EmpresaInterface } from "./interfaces/empresa-interface";
 import { AdminEmpresasService } from "./services/admin-empresas-service";
 
 @Component({
-	standalone: true,
-	selector: "admin-empresas",
-	templateUrl: "./admin-empresas.html",
-	imports: [
-		AdminPaginator,
-		AdminTableLoader,
-		CommonModule,
-		ReactiveFormsModule,
-		NgxSonnerToaster,
-	],
-	providers: [AdminEmpresasService],
+  standalone: true,
+  selector: "admin-empresas",
+  templateUrl: "./admin-empresas.html",
+  imports: [
+    AdminPaginator,
+    AdminTableLoader,
+    CommonModule,
+    ReactiveFormsModule,
+    NgxSonnerToaster,
+    RouterLink,
+    LucideAngularModule,
+  ],
+  providers: [AdminEmpresasService],
 })
 export class AdminEmpresas implements OnInit {
-	private destroyRef = inject(DestroyRef);
-	empresaService: AdminEmpresasService = inject(AdminEmpresasService);
-	private readonly toast = toast;
+  Settings = Settings;
 
-	filtro = new FormControl("");
+  private destroyRef = inject(DestroyRef);
+  empresaService: AdminEmpresasService = inject(AdminEmpresasService);
+  private readonly toast = toast;
 
-	// Data
-	empresas: WritableSignal<EmpresaInterface[]> = signal<EmpresaInterface[]>([]);
-	isLoading: WritableSignal<boolean> = signal(true);
+  filtro = new FormControl("");
 
-	// Paginacion
-	totalElements: WritableSignal<number> = signal(10);
-	totalPages: WritableSignal<number> = signal(5);
-	page: WritableSignal<number> = signal(0);
-	size: WritableSignal<number> = signal(5);
+  // Data
+  empresas: WritableSignal<EmpresaInterface[]> = signal<EmpresaInterface[]>([]);
+  isLoading: WritableSignal<boolean> = signal(true);
 
-	//estado = signal<boolean | null>(null);
-	sortBy = signal<string | null>(null);
-	sortDir = signal<"asc" | "desc" | null>(null);
+  // Paginacion
+  totalElements: WritableSignal<number> = signal(10);
+  totalPages: WritableSignal<number> = signal(5);
+  page: WritableSignal<number> = signal(0);
+  size: WritableSignal<number> = signal(5);
 
-	ngOnInit(): void {
-		this.filtro.valueChanges
-			.pipe(
-				tap(() => this.isLoading.set(true)),
-				debounceTime(400),
-				distinctUntilChanged(),
-				startWith(this.filtro.value),
-				takeUntilDestroyed(this.destroyRef),
-			)
-			.subscribe(() => {
-				this.buscarEmpresas();
-			});
-	}
+  //estado = signal<boolean | null>(null);
+  sortBy = signal<string | null>(null);
+  sortDir = signal<"asc" | "desc" | null>(null);
 
-	cambiarOrden(columna: string) {
-		if (this.sortBy() === columna) {
-			const nuevaDireccion = this.sortDir() === "asc" ? "desc" : "asc";
-			this.sortDir.set(nuevaDireccion);
-		} else {
-			this.sortBy.set(columna);
-			this.sortDir.set("asc");
-		}
+  ngOnInit(): void {
+    this.filtro.valueChanges
+      .pipe(
+        tap(() => this.isLoading.set(true)),
+        debounceTime(400),
+        distinctUntilChanged(),
+        startWith(this.filtro.value),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe(() => {
+        this.buscarEmpresas();
+      });
+  }
 
-		this.page.set(0);
+  cambiarOrden(columna: string) {
+    if (this.sortBy() === columna) {
+      const nuevaDireccion = this.sortDir() === "asc" ? "desc" : "asc";
+      this.sortDir.set(nuevaDireccion);
+    } else {
+      this.sortBy.set(columna);
+      this.sortDir.set("asc");
+    }
 
-		this.buscarEmpresas();
-	}
+    this.page.set(0);
 
-	buscarEmpresas() {
-		this.isLoading.set(true);
-		this.empresaService
-			.buscarEmpresas(
-				this.page(),
-				this.size(),
-				this.sortBy(),
-				this.sortDir(),
-				this.filtro.value,
-			)
-			.pipe(finalize(() => this.isLoading.set(false)))
-			.subscribe({
-				next: (res: ApiResponse<PageInterface<EmpresaInterface>>) => {
-					this.empresas.set(res.data!.content);
-					this.totalElements.set(res.data!.totalElements);
-					this.totalPages.set(res.data!.totalPages);
-					this.size.set(res.data!.size);
-					this.page.set(res.data!.number);
-					this.isLoading.set(false);
-				},
+    this.buscarEmpresas();
+  }
 
-				error: (err) => {
-					this.toast.error('Error al buscar empresas');
-				},
-			});
-	}
+  buscarEmpresas() {
+    this.isLoading.set(true);
+    this.empresaService
+      .buscarEmpresas(this.page(), this.size(), this.sortBy(), this.sortDir(), this.filtro.value)
+      .pipe(finalize(() => this.isLoading.set(false)))
+      .subscribe({
+        next: (res: ApiResponse<PageInterface<EmpresaInterface>>) => {
+          this.empresas.set(res.data!.content);
+          this.totalElements.set(res.data!.totalElements);
+          this.totalPages.set(res.data!.totalPages);
+          this.size.set(res.data!.size);
+          this.page.set(res.data!.number);
+          this.isLoading.set(false);
+        },
 
-	changePage(page: number) {
-		this.page.set(page);
-		this.buscarEmpresas();
-	}
+        error: (err) => {
+          this.toast.error("Error al buscar empresas");
+        },
+      });
+  }
 
-	changeSize(size: number) {
-		this.size.set(size);
-		this.buscarEmpresas();
-	}
+  changePage(page: number) {
+    this.page.set(page);
+    this.buscarEmpresas();
+  }
+
+  changeSize(size: number) {
+    this.size.set(size);
+    this.buscarEmpresas();
+  }
 }

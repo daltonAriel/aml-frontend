@@ -133,6 +133,7 @@ export class AdminFileUpload {
     const file = this.selectedFile();
     if (file) {
       this.onSave.emit(file);
+      this.onDeleteImage();
     }
   }
 

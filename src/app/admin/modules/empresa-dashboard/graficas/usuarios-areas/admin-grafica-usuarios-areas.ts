@@ -19,20 +19,17 @@ export class AdminGraficaUsuariosArea {
     tooltip: {
       trigger: "item",
     },
-    legend: {
-      orient: "horizontal",
-    },
     series: [
       {
         name: "Access From",
         type: "pie",
         radius: "60%",
         data: [
-          { value: 1048, name: "Search Engine" },
-          { value: 735, name: "Direct" },
-          { value: 580, name: "Email" },
-          { value: 484, name: "Union Ads" },
-          { value: 300, name: "Video Ads" },
+          { value: 3, name: "Cajero" },
+          { value: 4, name: "Administracion" },
+          { value: 2, name: "Oficial de Cumplimiento" },
+          { value: 1, name: "Coordinador" },
+          { value: 5, name: "Servicio al Cliente" },
         ],
         emphasis: {
           itemStyle: {

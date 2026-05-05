@@ -1,0 +1,132 @@
+<div class="min-h-screen bg-slate-50/50 p-4 antialiased">
+  <div class="mx-auto max-w-4xl" cdkDropListGroup>
+    <div class="mb-6 flex items-center justify-between">
+      <h1 class="text-2xl font-bold text-slate-900">Configuración de Menú</h1>
+    </div>
+
+    <!-- ZONA 1: LISTA PRINCIPAL (Padres) -->
+    <div
+      cdkDropList
+      [cdkDropListData]="MENU_DATA()"
+      (cdkDropListDropped)="dropPrincipal($event)"
+      class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm"
+    >
+      @for (node of MENU_DATA(); track node.menuId) {
+        <div cdkDrag [cdkDragData]="node" cdkDragLockAxis="y" class="mb-3 block">
+          <!-- CONTENIDO DEL PADRE -->
+          <div
+            class="group flex items-center justify-between rounded-2xl border border-slate-100 bg-white p-4 shadow-sm transition-all hover:border-[#2db2b1]/30 hover:shadow-md"
+          >
+            <div class="flex items-center gap-3">
+              <!-- Manillar del Padre -->
+              <button
+                cdkDragHandle
+                type="button"
+                class="cursor-grab text-slate-300 transition-colors hover:text-slate-500 active:cursor-grabbing"
+              >
+                <lucide-icon [img]="GripVertical" class="h-5 w-5"></lucide-icon>
+              </button>
+
+              <div
+                [class]="
+                  node.menuEstado ? 'text-[#2db2b1] transition-colors group-hover:bg-[#2db2b1]/10' : 'text-red-500 group-hover:bg-red-500/10'
+                "
+                class="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-50  transition-colors"
+              >
+                <lucide-icon [img]="Folder" class="h-5 w-5"></lucide-icon>
+              </div>
+
+              <div class="flex flex-col">
+                <div class="flex items-center gap-2">
+                  <span class="text-sm font-bold tracking-tight text-slate-800">{{ node.menuLabel }}</span>
+                  <span
+                    [class]="node.menuEstado ? 'bg-[#2db2b1]/10 text-[#2db2b1]' : 'bg-red-500/10 text-red-500'"
+                    class="rounded-full px-2 py-0.5 text-[9px] font-bold tracking-wider uppercase"
+                    >Módulo</span
+                  >
+                </div>
+                <span class="text-[10px] font-bold tracking-tight text-slate-400 uppercase">Principal</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button type="button" class="rounded-lg p-1.5 text-slate-400 hover:bg-slate-50 hover:text-red-500">
+                <lucide-icon [img]="Trash2" class="h-4 w-4"></lucide-icon>
+              </button>
+              <button type="button" class="rounded-xl p-2 text-slate-400 hover:bg-slate-50 hover:text-[#2db2b1]">
+                <lucide-icon [img]="Settings" class="h-4 w-4"></lucide-icon>
+              </button>
+              <button type="button" class="rounded-xl p-2 text-slate-400 hover:bg-slate-50 hover:text-[#2db2b1]">
+                <lucide-icon [img]="Plus" class="h-4 w-4"></lucide-icon>
+              </button>
+
+              <!-- Botón Toggle: Controlamos isExpanded manualmente -->
+              <button
+                type="button"
+                (click)="node.isExpanded = !node.isExpanded"
+                class="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-50 text-slate-500 shadow-sm transition-all hover:bg-[#2db2b1] hover:text-white"
+                [style.transform]="node.isExpanded ? 'rotate(90deg)' : 'rotate(0deg)'"
+              >
+                <lucide-icon [img]="ChevronRight" class="h-4 w-4"></lucide-icon>
+              </button>
+            </div>
+          </div>
+
+          <!-- ZONA 2: LISTA DE HIJOS (Subitems) -->
+          <!-- Al estar dentro del bucle del padre, se aísla automáticamente -->
+          <div
+            cdkDropList
+            [cdkDropListData]="node.subMenus"
+            (cdkDropListDropped)="dropSubitem($event, node)"
+            [class.hidden]="!node.isExpanded"
+            class="mt-2 ml-14 min-h-[10px] space-y-2 border-l-2 border-slate-100 py-1 pl-4 transition-all"
+          >
+            @for (subitem of node.subMenus; track subitem.menuId) {
+              <div cdkDrag [cdkDragData]="subitem" cdkDragLockAxis="y" class="mb-2 block">
+                <!-- CONTENIDO DEL HIJO -->
+                <div
+                  class="group flex items-center justify-between rounded-xl border border-transparent bg-white/60 p-3 transition-all hover:border-[#2db2b1]/20 hover:bg-white hover:shadow-sm"
+                >
+                  <div class="flex items-center gap-3">
+                    <!-- Manillar del Hijo -->
+                    <button
+                      cdkDragHandle
+                      type="button"
+                      class="cursor-grab text-slate-200 transition-colors hover:text-slate-400 active:cursor-grabbing"
+                    >
+                      <lucide-icon [img]="GripVertical" class="h-4 w-4"></lucide-icon>
+                    </button>
+
+<div [class]="node.menuEstado && subitem.menuEstado
+     ? 'bg-[#2db2b1] group-hover:bg-[#2db2b1]' 
+     : 'bg-red-500 group-hover:bg-red-500'"
+     class="h-1.5 w-1.5 rounded-full opacity-60 transition-all group-hover:scale-125 group-hover:opacity-100">
+</div>
+
+                    <div class="flex flex-col">
+                      <span class="text-sm font-semibold text-slate-600 transition-colors group-hover:text-slate-900">
+                        {{ subitem.menuLabel }}</span>
+                      <span class="text-[9px] font-medium text-slate-400 italic">Submenú</span>
+                    </div>
+                  </div>
+
+                  <div
+                    
+                    class="flex translate-x-2 transform items-center gap-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100"
+                  >
+                    <button type="button" class="rounded-lg p-1.5 text-slate-400 hover:bg-slate-50 hover:text-red-500">
+                      <lucide-icon [img]="Trash2" class="h-4 w-4"></lucide-icon>
+                    </button>
+                    <button type="button" class="rounded-xl p-2 text-slate-400 hover:bg-slate-50 hover:text-[#2db2b1]">
+                      <lucide-icon [img]="Settings" class="h-4 w-4"></lucide-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

@@ -1,20 +1,20 @@
 /** biome-ignore-all lint/style/noNonNullAssertion: <> */
 import { Component, inject, type OnInit, signal } from "@angular/core";
 import {
-  FormBuilder,
-  type FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
+	FormBuilder,
+	type FormGroup,
+	FormsModule,
+	ReactiveFormsModule,
+	Validators,
 } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { environment } from "@config/enviroment";
 import {
-  Image,
-  ImageIcon,
-  Info,
-  LucideAngularModule,
-  Palette,
+	Image,
+	ImageIcon,
+	Info,
+	LucideAngularModule,
+	Palette,
 } from "lucide-angular";
 import { NgxSonnerToaster, toast } from "ngx-sonner";
 import { finalize } from "rxjs";
@@ -72,7 +72,6 @@ export class AdminEmpresaTema implements OnInit {
 	});
 
 	obtenerTema() {
-		console.log(this._empresaId);
 		if (this._empresaId == null) return;
 		this.isLoading.set(true);
 		this.empresaTemaService
@@ -82,9 +81,7 @@ export class AdminEmpresaTema implements OnInit {
 				next: (res) => {
 					this.temaForm.patchValue(res.data!);
 					const _url = `${this._imgBaseUrl}/${res.data!.temaLogoUrl}`;
-          console.log("url:", _url);
-          console.log(_url);
-					this.logoUrl.set("http://localhost:8080/api/v1/resources/imagefile/logo_3fa59299-fe00-41d5-a263-a9bf4580dfa6.png");
+					this.logoUrl.set(_url);
 				},
 				error: () => {
 					this.toast.error("Error al obtener el tema de la empresa");
@@ -114,7 +111,7 @@ export class AdminEmpresaTema implements OnInit {
 	}
 
 	eliminarImagen() {
-		console.log("eliminando imagen de la base de datos");
+		//////////
 	}
 
 	guardarImagen($image: File) {
@@ -126,6 +123,7 @@ export class AdminEmpresaTema implements OnInit {
 				next: (res) => {
 					this.logoUrl.set(res.data!.temaLogoUrl!);
 					this.toast.success("Logo actualizado exitosamente");
+					this.obtenerTema();
 				},
 				error: () => {
 					this.toast.error("Error al actualizar el logo de la empresa");
