@@ -1,19 +1,18 @@
-FROM node:22-alpine
+FROM node:22-alpine AS prod-builder
 
-# Carpeta de trabajo
 WORKDIR /app
-
-# Copiamos dependencias primero (mejor cache)
 COPY package*.json ./
-
-# Instalamos dependencias
 RUN npm install
 
-# Copiamos el resto del proyecto
 COPY . .
+RUN npm run build
 
-# Exponemos el puerto de Angular
-EXPOSE 4200
 
-# Comando para levantar Angular en modo dev
-CMD ["npm", "run", "start", "--", "--host", "0.0.0.0", "--port", "4200"]
+FROM nginx:alpine
+
+COPY --from=prod-builder /app/dist/aml-app-frontend/browser /usr/share/nginx/html
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 4201
+
+CMD ["nginx", "-g", "daemon off;"]
