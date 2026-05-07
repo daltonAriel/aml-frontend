@@ -30,7 +30,8 @@
           [class.text-slate-400]="disabled()"
           [class.hover:scale-110]="!disabled()"
         >
-          <lucide-icon [name]="Upload" class="h-6 w-6"></lucide-icon>
+         
+          <i class="fa-solid fa-arrow-up-from-bracket text-2xl"></i>
         </div>
         <p class="text-sm font-semibold text-slate-700 px-2" [class.text-slate-400]="disabled()">
           {{ disabled() ? 'Carga deshabilitada' : 'Haz clic para subir o arrastra' }}
@@ -48,7 +49,7 @@
           <img alt="logo preview" [src]="previewUrl()" class="h-full w-full object-cover transition-all" [class.group-hover:opacity-50]="!disabled()" />
           @if (!disabled()) {
             <div class="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
-              <lucide-icon [name]="Upload" class="h-6 w-6 text-slate-800"></lucide-icon>
+              <i class="fa-solid fa-arrow-up-from-bracket text-2xl text-slate-800"></i>
             </div>
           }
         </div>
@@ -88,7 +89,7 @@
           (click)="onDeleteImage()"
           class="flex w-full items-center justify-center gap-1.5 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs font-bold text-red-600 transition-colors hover:bg-red-100 hover:text-red-700 sm:w-auto sm:py-1.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-400"
         >
-          <lucide-icon [name]="hasNewFile() ? X : Trash2" class="h-4 w-4"></lucide-icon>
+          <i class="fa-solid fa-trash-can "></i>
           {{ hasNewFile() ? 'Limpiar imagen seleccionada' : 'Eliminar de BD' }}
         </button>
       }
@@ -100,7 +101,7 @@
           (click)="onSaveImage()"
           class="flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#2db2b1] px-4 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#259695] sm:w-auto sm:py-1.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-slate-300"
         >
-          <lucide-icon [name]="Save" class="h-4 w-4"></lucide-icon>
+          <i class="fa-solid fa-floppy-disk text-base"></i>
           Guardar imagen
         </button>
       }

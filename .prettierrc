@@ -3,10 +3,10 @@
 	"singleQuote": false,
 	"overrides": [
 		{
-			"files": "*.html",
+			"files": "*.html,*.ts,*.js",
 			"options": {
 				"parser": "angular",
-				"printWidth": 140
+				"printWidth": 160
 			}
 		}
 	],

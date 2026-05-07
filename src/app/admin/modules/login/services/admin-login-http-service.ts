@@ -20,9 +20,9 @@ export class AdminLoginHttpService {
     return this._http
       .post<ApiResponse<TokenInterface>>(`${this._baseUrl}/auth/admin/login`, loginnRequest)
       .pipe(
-        map((response) => {
-          const token = response.data!.token;
-          sessionStorage.setItem("jwt", token);
+        map((response: ApiResponse<TokenInterface>) => {
+          const token = response.data?.token;
+          sessionStorage.setItem("jwt", token!);
           return response;
         }),
         catchError((error) => {

@@ -1,15 +1,3 @@
-export interface MenuConstructorInterface {
-  id: string;
-  label: string;
-  route?: string;
-  icon?: string;
-  order: number;
-  parentId?: string | null;
-  children: MenuConstructorInterface[];
-  isExpanded?: boolean;
-  status?: boolean;
-}
-
 export interface MenuInterface {
   menuId: string;
   menuIdPadre: string | null;
@@ -21,4 +9,18 @@ export interface MenuInterface {
   menuOrden: number;
   menuEstado: boolean;
   isExpanded?: boolean;
+}
+
+export interface MenuRequestInterface {
+  menuLabel: string;
+  menuIdPadre: string | null;
+
+  menuUrl: string;
+  menuIcon: string;
+  menuOrden: number;
+  menuEstado: boolean;
+}
+
+export interface MenuReordenarInterface {
+  listaMenuId: string[];
 }

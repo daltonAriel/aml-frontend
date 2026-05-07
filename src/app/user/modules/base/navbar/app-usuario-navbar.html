@@ -1,0 +1,89 @@
+<div class="flex h-full flex-1 flex-col overflow-hidden">
+  <header
+    class="sticky top-0 z-10 flex h-20 items-center justify-between border-b border-slate-200 bg-white/80 px-6 shadow-sm backdrop-blur-md"
+  >
+    <div class="flex items-center gap-6">
+      <!-- Botón hamburguesa -->
+      <button
+        type="button"
+        class="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-800"
+      >
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <title>Menu</title>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h7"
+          ></path>
+        </svg>
+      </button>
+
+      <!-- Buscador -->
+      <div class="relative hidden items-center md:flex">
+        <svg
+          class="absolute left-3 h-5 w-5 text-slate-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <title>Buscar</title>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          ></path>
+        </svg>
+        <input
+          type="text"
+          placeholder="Buscar transacciones, usuarios..."
+          class="w-80 rounded-xl border border-transparent bg-slate-100 py-2.5 pr-4 pl-10 text-sm font-medium text-slate-700 transition-all outline-none placeholder:text-slate-400 focus:border-slate-800 focus:bg-white focus:ring-2 focus:ring-slate-800/20"
+        />
+      </div>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <!-- Notificaciones -->
+      <button
+        type="button"
+        class="relative p-2 text-slate-400 transition-colors hover:text-slate-900"
+      >
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <title>Notificaciones</title>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+          ></path>
+        </svg>
+        <span
+          class="absolute top-1 right-1.5 h-2 w-2 rounded-full border-2 border-white bg-red-500"
+        ></span>
+      </button>
+
+      <!-- Separador -->
+      <div class="h-8 w-px bg-slate-200"></div>
+
+      <!-- Perfil de usuario -->
+      <button type="button" class="flex items-center gap-3 transition-opacity hover:opacity-80">
+        <div class="hidden text-right sm:block">
+          <p class="text-sm font-bold text-slate-900">
+            {{ null }}
+          </p>
+          <p class="text-xs font-medium text-slate-500">{{ null }}</p>
+        </div>
+        <div
+          class="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-800/30 bg-slate-800/20 font-bold text-slate-800"
+        >
+          {{ null }}
+        </div>
+      </button>
+    </div>
+  </header>
+
+  <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50/5 p-6 lg:p-8">
+    <ng-content></ng-content>
+  </main>
+</div>

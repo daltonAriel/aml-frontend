@@ -27,7 +27,7 @@ export class Login {
   private readonly toast = toast;
 
   stattusHttpLogin = signal<boolean>(false);
-
+  mostrarContrasena = false;
 
   loginForm = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
@@ -60,6 +60,12 @@ export class Login {
           }
         },
       });
+  }
+
+  
+
+  toggleMostrarContrasena() {
+    this.mostrarContrasena = !this.mostrarContrasena;
   }
 
 }

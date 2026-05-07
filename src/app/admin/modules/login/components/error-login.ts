@@ -9,7 +9,7 @@ import type { AbstractControl } from "@angular/forms";
 	selector: "error-login",
 	template: `
     @if (checkControl()) {}
-    <span class="pl-5 text-xs text-red-500 italic">
+    <span class="pl-5 text-xs text-red-500 font-semibold">
       {{ checkControl() }}
     </span>
   `,

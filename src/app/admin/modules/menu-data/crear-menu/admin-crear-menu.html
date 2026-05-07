@@ -1,0 +1,65 @@
+<form [formGroup]="menuFrom" class="space-y-6 p-2">
+
+  <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+    <div class="md:col-span-2">
+      <admin-form
+        [label]="'Label'"
+        [placeholder]="'Nombre del Menu'"
+        [type]="'text'"
+        formControlName="menuLabel"
+        [control]="menuFrom.controls['menuLabel']"
+        [isBlocked]="isLoading()"
+      ></admin-form>
+    </div>
+    <div class="">
+      <admin-form
+        [label]="'URL'"
+        [placeholder]="'/example/url'"
+        [type]="'text'"
+        formControlName="menuUrl"
+        [control]="menuFrom.controls['menuUrl']"
+        [isBlocked]="isLoading()"
+      ></admin-form>
+    </div>
+
+    <div>
+      <admin-form
+        [label]="'Icono'"
+        [placeholder]="''"
+        [type]="'text'"
+        formControlName="menuIcon"
+        [isBlocked]="isLoading()"
+        [control]="menuFrom.controls['menuIcon']"
+      >
+      </admin-form>
+    </div>
+
+    <div class="">
+      <div>
+        <admin-select-state [label]="'Estado'" formControlName="menuEstado" [control]="menuFrom.controls['menuEstado']" [isBlocked]="isLoading()">
+        </admin-select-state>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-6 mx-auto mt-8 w-full">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <button
+          (click)="guardar()"
+          [disabled]="menuFrom.invalid"
+          class="flex items-center gap-2 rounded-xl bg-emerald-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-emerald-500 focus:ring-2 focus:ring-emerald-500 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+        >
+          <admin-spiner-loader
+            [disabled]="!isLoading()"
+            [width]="'w-5'"
+            [height]="'h-5'"
+            [colorFill]="'fill-slate-50'"
+            [bgColor]="'text-slate-600/20'"
+          ></admin-spiner-loader>
+          Guardar Cambios</button
+        >
+      </div>
+    </div>
+  </div>
+</form>

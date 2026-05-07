@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+:root {
+  --primary-var-color-theme: #1E293B;
+}
+
+
+@theme {
+  --color-tema-primary: var(--primary-var-color-theme); /* Color principal */
+
+  --color-tema-hover-simple-black: color-mix(in oklch, var(--color-black) 10%, transparent);  /* Color hover simple con opacidad util para hover o active en sedenav */
+  --color-tema-hover-simple-white: color-mix(in oklch, var(--color-white) 10%, transparent); /* Color hover simple con opacidad util para hover o active en sedenav */
+
+  --color-tema-border-primary-dark: var(--color-slate-800); /* color principal para fuentes slate-800*/
+  --color-tema-border-primary-light: var(--color-slate-200); /* color principal para fuentes slate-100 */
+
+  --color-tema-texto-primary-dark: var(--color-slate-800); /* color principal para fuentes slate-800*/
+  --color-tema-texto-primary-light: var(--color-slate-200); /* color principal para fuentes slate-100 */
+
+  --color-tema-texto-secondary-dark: var(--color-slate-600); /* color secundario para fuentes slate-600 */
+  --color-tema-texto-secondary-light: var(--color-slate-300); /* color secundario para fuentes slate-300 */
+
+}

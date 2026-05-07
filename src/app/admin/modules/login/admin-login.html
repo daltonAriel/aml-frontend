@@ -1,27 +1,13 @@
-<div
-  class="flex min-h-screen items-center justify-center bg-[#f8fafc] bg-[url('/bg_login.png')] bg-cover bg-center p-4 font-sans sm:p-8"
->
-  <div
-    class="flex w-full max-w-6xl overflow-hidden rounded-[2.5rem] border border-white/20 bg-white shadow-2xl"
-  >
+<div class="flex min-h-screen items-center justify-center bg-[#f8fafc] bg-[url('/bg_login.png')] bg-cover bg-center p-4 font-sans sm:p-8">
+  <div class="flex w-full max-w-6xl overflow-hidden rounded-[2.5rem] border border-white/20 bg-white shadow-2xl">
     <div class="relative hidden w-1/2 overflow-hidden lg:block">
-      <div
-        class="absolute inset-0 z-10 bg-linear-to-b from-[#0f172a]/60 via-[#0f172a]/80 to-[#0f172a]"
-      ></div>
-      <img
-        src="/bg_logo.png"
-        class="absolute inset-0 h-full w-full object-cover"
-        alt="Background"
-      />
+      <div class="absolute inset-0 z-10 bg-linear-to-b from-[#0f172a]/60 via-[#0f172a]/80 to-[#0f172a]"></div>
+      <img src="/bg_logo.png" class="absolute inset-0 h-full w-full object-cover" alt="Background" />
 
-      <div
-        class="relative z-20 flex h-full flex-col items-center justify-center p-16 text-center text-white"
-      >
+      <div class="relative z-20 flex h-full flex-col items-center justify-center p-16 text-center text-white">
         <img src="/logo.png" alt="Logo AML" class="animate-fade-in mb-8 w-32 drop-shadow-2xl" />
 
-        <h1 class="text-5xl font-black tracking-tighter uppercase italic">
-          AML <span class="text-[#2db2b1]">Cordova</span>
-        </h1>
+        <h1 class="text-5xl font-black tracking-tighter uppercase italic">AML <span class="text-[#2db2b1]">Cordova</span></h1>
 
         <div class="mt-6 h-1.5 w-16 rounded-full bg-[#2db2b1]"></div>
 
@@ -44,23 +30,17 @@
 
         <div class="mb-12">
           <h2 class="text-3xl font-black tracking-tight text-slate-900">Iniciar Sesión</h2>
-          <p class="mt-2 font-medium text-slate-500">
-            Bienvenido de vuelta, ingresa tus credenciales.
-          </p>
+          <p class="mt-2 font-medium text-slate-500">Bienvenido de vuelta, ingresa tus credenciales.</p>
         </div>
 
         <form [formGroup]="loginForm" action="#" class="space-y-7">
           <div class="space-y-2">
-            <label class="ml-4 text-xs font-bold tracking-widest text-slate-500 uppercase"
-              >Correo Electrónico</label
-            >
+            <label class="ml-4 text-xs font-bold tracking-widest text-slate-500 uppercase">Correo Electrónico</label>
             <div class="group relative">
               <div
                 class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-5 text-slate-400 transition-colors group-focus-within:text-[#2db2b1]"
               >
-                <svg class="size-5" viewBox="0 0 24 24" lucideAtSign>
-                  <title>Correo_icon</title>
-                </svg>
+                <i class="fa-solid fa-at text-xl"></i>
               </div>
               <input
                 formControlName="email"
@@ -74,32 +54,40 @@
           </div>
 
           <div class="space-y-2">
-            <label class="ml-4 text-xs font-bold tracking-widest text-slate-500 uppercase"
-              >Contraseña</label
-            >
+            <label class="ml-4 text-xs font-bold tracking-widest text-slate-500 uppercase">Contraseña</label>
             <div class="group relative">
+              <!-- Ícono de candado a la izquierda -->
               <div
                 class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-5 text-slate-400 transition-colors group-focus-within:text-[#2db2b1]"
               >
-                <svg class="size-5" viewBox="0 0 24 24" lucideLockKeyhole>
-                  <title>password_icon</title>
-                </svg>
+                <i class="fa-solid fa-lock text-xl"></i>
               </div>
+
+              <!-- Input de contraseña con tipo dinámico -->
               <input
                 formControlName="contrasena"
-                type="password"
+                [type]="mostrarContrasena ? 'text' : 'password'"
                 required
-                placeholder="contraseña"
-                class="block w-full rounded-full border-2 border-slate-100 bg-slate-50 py-4 pr-6 pl-14 text-slate-900 transition-all outline-none focus:border-[#2db2b1] focus:bg-white"
+                placeholder="contraseña"
+                class="block w-full rounded-full border-2 border-slate-100 bg-slate-50 py-4 pr-14 pl-14 text-slate-900 transition-all outline-none focus:border-[#2db2b1] focus:bg-white"
               />
+
+              <!-- Botón para mostrar/ocultar a la derecha -->
+              @if (loginForm.controls.contrasena.value.length > 0) {
+                <button
+                  type="button"
+                  (click)="toggleMostrarContrasena()"
+                  class="absolute inset-y-0 right-0 flex items-center pr-5 text-slate-400 transition-colors hover:text-[#2db2b1]"
+                >
+                  <i [class]="mostrarContrasena ? 'fa-solid fa-eye-slash text-xl' : 'fa-solid fa-eye text-xl'"></i>
+                </button>
+              }
             </div>
             <error-login [control]="loginForm.controls.contrasena"></error-login>
           </div>
 
           <div class="flex justify-end px-2">
-            <a
-              href="#"
-              class="text-sm font-bold text-[#2db2b1] underline-offset-4 transition-colors hover:text-[#259796] hover:underline"
+            <a href="#" class="text-sm font-bold text-[#2db2b1] underline-offset-4 transition-colors hover:text-[#259796] hover:underline"
               >¿Olvidaste tu contraseña?</a
             >
           </div>
@@ -111,27 +99,18 @@
           >
             <span class="relative z-10 flex items-center justify-center">
               <p class="m-2">
-                <admin-spiner-loader
-                  [disabled]="!stattusHttpLogin()"
-                  [width]="'w-6'"
-                  [height]="'h-6'"
-                ></admin-spiner-loader>
+                <admin-spiner-loader [disabled]="!stattusHttpLogin()" [width]="'w-6'" [height]="'h-6'"></admin-spiner-loader>
               </p>
               Ingresar al Sistema
             </span>
-            <div
-              class="absolute inset-0 z-0 bg-linear-to-r from-[#2db2b1] to-[#1f9e9e] opacity-0 transition-opacity group-hover:opacity-100"
-            ></div>
+            <div class="absolute inset-0 z-0 bg-linear-to-r from-[#2db2b1] to-[#1f9e9e] opacity-0 transition-opacity group-hover:opacity-100"></div>
           </button>
         </form>
 
         <div class="mt-12 text-center">
           <p class="text-sm font-medium text-slate-500">
             ¿Necesitas ayuda técnica?
-            <a
-              href="#"
-              class="mt-1 block font-black tracking-tighter text-[#0f172a] uppercase transition-colors hover:text-[#2db2b1]"
-            >
+            <a href="#" class="mt-1 block font-black tracking-tighter text-[#0f172a] uppercase transition-colors hover:text-[#2db2b1]">
               Contactar Soporte TI
             </a>
           </p>

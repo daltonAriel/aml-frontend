@@ -1,0 +1,109 @@
+<div class="flex min-h-screen items-center justify-center bg-linear-to-br from-slate-100 to-slate-200 p-4 antialiased md:p-6">
+  <main class="flex w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl md:flex-row">
+    <section class="flex w-full flex-col justify-center bg-white p-8 md:w-1/2 md:p-10 lg:p-12">
+      <div class="mb-8 flex items-center gap-3">
+        <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-white shadow-sm">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            <path d="M12 8v4"></path>
+            <path d="M12 16h.01"></path>
+          </svg>
+        </div>
+        <span class="text-xl font-semibold tracking-tight text-slate-800">
+          AML<span class="font-light text-slate-500">|Cordova</span>
+        </span>
+      </div>
+
+      <h1 class="mb-1 text-2xl font-semibold text-slate-800">Inicio de sesión</h1>
+
+      <form [formGroup]="loginForm" class="space-y-5" action="#" method="POST">
+        <div>
+          <label class="mb-1 block text-sm font-medium text-slate-700">Correo institucional</label>
+          <input
+            formControlName="email"
+            type="email"
+            placeholder="nombre@entidadfinanciera.com"
+            class="w-full rounded-lg border border-slate-300 bg-slate-50 px-4 py-2.5 text-sm text-slate-800 transition outline-none placeholder:text-slate-400 focus:border-slate-800 focus:bg-white focus:ring-2 focus:ring-slate-800"
+          />
+          <error-user-login [control]="loginForm.controls.email"></error-user-login>
+        </div>
+
+        <div>
+          <label class="mb-1 block text-sm font-medium text-slate-700">Contraseña</label>
+          <input
+            formControlName="contrasena"
+            type="password"
+            placeholder="••••••••"
+            class="w-full rounded-lg border border-slate-300 bg-slate-50 px-4 py-2.5 text-sm text-slate-800 transition outline-none placeholder:text-slate-400 focus:border-slate-800 focus:bg-white focus:ring-2 focus:ring-slate-800"
+          />
+          <error-user-login [control]="loginForm.controls.contrasena"></error-user-login>
+        </div>
+
+        <div class="flex items-center justify-end gap-4">
+          <a href="#" class="text-sm text-blue-700 transition hover:text-blue-800">¿Olvidó su contraseña?</a>
+        </div>
+
+        <button
+          [disabled]="loginForm.invalid || stattusHttpLogin()"
+          (click)="login()"
+          type="submit"
+          class="mt-2 flex w-full items-center justify-center gap-2 rounded-lg bg-slate-800 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-slate-700"
+        >
+          <spiner-user-login [disabled]="!stattusHttpLogin()"></spiner-user-login>
+          Ingresar al sistema
+        </button>
+      </form>
+
+      <div class="mt-8 border-t border-slate-100 pt-5 text-center">
+        <p class="text-xs text-slate-400">Actividades monitoreadas para cumplimiento normativo</p>
+      </div>
+    </section>
+
+    <section class="relative hidden w-full flex-col items-center justify-center bg-slate-800 p-8 text-center md:flex md:w-1/2">
+      <div
+        class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-size-[24px_24px]"
+      ></div>
+
+      <div class="relative z-10 mx-auto max-w-xs">
+        <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 text-white/90 backdrop-blur-sm">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            <path d="M12 8v4"></path>
+            <path d="M12 16h.01"></path>
+          </svg>
+        </div>
+
+        <h2 class="mb-2 text-xl font-semibold text-white">Prevención de Lavado de Activos</h2>
+        <p class="text-sm leading-relaxed text-slate-300">
+          Plataforma central de detección, análisis y reporte de operaciones sospechosas.
+        </p>
+
+        <div class="mt-6 inline-block rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300">
+          Cumplimiento GAFI | ISO 37001
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<ngx-sonner-toaster position="bottom-right" richColors duration="7000" />

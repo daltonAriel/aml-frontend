@@ -39,8 +39,7 @@
         <h3 class="text-[11px] font-bold tracking-widest text-gray-400 uppercase">Dirección</h3>
 
         <div class="mt-1 flex items-start gap-3">
-          <lucide-icon [img]="MapPin" class="h-5 w-5 text-slate-400"></lucide-icon>
-
+          <i class="fa-solid fa-location-dot text-slate-400 text-lg"></i>
           <div class="text-[15px] leading-relaxed text-gray-700">
             <p class="font-medium text-gray-900">{{ datosEmpresa()?.provinciaNombre }}</p>
             <p>{{ datosEmpresa()?.cantonNombre }}</p>
@@ -54,19 +53,21 @@
 
         <ul class="mt-1 space-y-3">
           <li class="flex items-center gap-3">
-            <lucide-icon [img]="Phone" class="h-5 w-5 shrink-0 text-slate-400"></lucide-icon>
+            <i class="fa-solid fa-phone text-slate-400 text-lg"></i>
             <span class="text-[15px] font-medium text-gray-900">{{ datosEmpresa()?.empresaTelefono }}</span>
           </li>
 
           <li class="flex items-center gap-3">
-            <lucide-icon [img]="Globe" class="h-5 w-5 shrink-0 text-slate-400"></lucide-icon>
-            <a href="#" class="text-[15px] text-gray-600 transition-colors hover:text-blue-600"> www.novatech.com </a>
+            <i class="fa-solid fa-globe text-slate-400 text-lg"></i>
+            <a href="{{datosEmpresa()?.empresaWeb}}" rel="noopener noreferrer" target="_blank" class="text-[15px] text-gray-600 transition-colors hover:text-blue-600">
+              {{ datosEmpresa()?.empresaWeb }}
+            </a>
           </li>
 
           <li class="flex items-center gap-3">
-            <lucide-icon [img]="Mail" class="h-5 w-5 shrink-0 text-slate-400"></lucide-icon>
+            <i class="fa-solid fa-envelope text-slate-400 text-lg"></i>
             <a href="mailto:info@novatech.com" class="text-[15px] text-gray-600 transition-colors hover:text-blue-600">
-              info@novatech.com
+              {{ datosEmpresa()?.empresaEmail }}
             </a>
           </li>
         </ul>
@@ -88,7 +89,7 @@
         <div
           class="flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-50 text-teal-600 ring-1 ring-teal-100 transition group-hover:scale-105"
         >
-          <lucide-icon [img]="Building2" class="h-7 w-7"></lucide-icon>
+          <i class="fa-solid fa-file-pen text-2xl"></i>
         </div>
 
         <div>
@@ -114,7 +115,7 @@
         class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-teal-200 hover:bg-teal-50 hover:text-teal-700"
       >
         Abrir
-        <lucide-icon [img]="ArrowUpRight" class="h-4 w-4"></lucide-icon>
+        <i class="fa-solid fa-arrow-up rotate-45"></i>
       </button>
     </div>
   </div>
@@ -131,7 +132,7 @@
         <div
           class="flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 ring-1 ring-indigo-100 transition group-hover:scale-105"
         >
-          <lucide-icon [img]="Palette" class="h-7 w-7"></lucide-icon>
+          <i class="fa-solid fa-palette text-2xl"></i>
         </div>
 
         <div>
@@ -157,7 +158,7 @@
         class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700"
       >
         Abrir
-        <lucide-icon [img]="ArrowUpRight" class="h-4 w-4"></lucide-icon>
+        <i class="fa-solid fa-arrow-up rotate-45"></i>
       </button>
     </div>
   </div>
@@ -174,7 +175,7 @@
         <div
           class="flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 ring-1 ring-emerald-100 transition group-hover:scale-105"
         >
-          <lucide-icon [img]="Users" class="h-7 w-7"></lucide-icon>
+          <i class="fa-solid fa-users text-2xl"></i>
         </div>
 
         <div>
@@ -200,7 +201,7 @@
         class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-700"
       >
         Abrir
-        <lucide-icon [img]="ArrowUpRight" class="h-4 w-4"></lucide-icon>
+        <i class="fa-solid fa-arrow-up rotate-45"></i>
       </button>
     </div>
   </div>

@@ -4,7 +4,7 @@ import { Component, computed, input, output } from "@angular/core";
 	standalone: true,
 	selector: "admin-paginator",
 	templateUrl: "./admin-paginator.html",
-	styleUrl: "./admin-paginator.scss",
+	styleUrl: "./admin-paginator.css",
 	imports: [],
 	providers: [],
 })
